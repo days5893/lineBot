@@ -65,7 +65,8 @@ function selectRegisterName(event) {
   }
 
   if (nameList.length >= 11) {
-    return replyMessage(event, "これ以上登録できません。");
+    replyMessage(event, "これ以上登録できません。");
+    return;
   }
 
   const items = [];
@@ -181,6 +182,11 @@ function selectRemoveName(event) {
     }
   }
 
+  if (nameList.length == 0) {
+    replyMessage(event, "まだ名前が登録されていません。");
+    return;
+  }
+  
   //選択肢の配列
   const items = [];
   for (let i = 0; i < nameList.length; i++) {

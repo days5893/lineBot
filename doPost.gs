@@ -1,6 +1,6 @@
 //固定値
-const channel_token = "アクセストークン";
-const spreadsheet = SpreadsheetApp.openById("スプレッドシートのID");
+const channel_token = "**********"; //チャンネルアクセストークン
+const spreadsheet = SpreadsheetApp.openById("**********");  //スプレッドシートのID
 const sheet_userlist = spreadsheet.getSheetByName('userlist');
 const sheet_form = spreadsheet.getSheetByName('form');
 const last_row = sheet_userlist.getLastRow();
@@ -27,7 +27,7 @@ function doPost(e) {
     if (eventType == "message") {
       if (registerState == 1 && registerId > 0) {
         const name = event.message.text.replace(/(\s|\n)+/g, ""); //空白・改行の削除       
-        if (name.match(/\d+/)) {
+        if (name.match(/(\d|[０-９])+/)) {
           replyMessage(event, "数字を含まない形で入力してください。");
         } else if (name.match(/^(?!.*(キャンセル|登録|削除)).*$/)) {
           registerConfirm(event, registerId, name);
@@ -113,8 +113,14 @@ function checkName(event) {
           message += `・${name} さん\n`;
         }
       }
-      message += "が登録されています。"
-      replyMessage(event, message);
+
+      if (message != "") {
+        message += "が登録されています。";
+        replyMessage(event, message);
+      } else {
+        replyMessage(event, "まだ名前が登録されていません。");
+        return;
+      }
     }
   }
 }
