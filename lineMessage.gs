@@ -1,5 +1,6 @@
 //lineのpushメッセージ
 function pushMessage(to, texts) {
+  //texts配列をメッセージの形式に直す
   let messages = [];
   for (let i = 0; i < texts.length; i++) {
     messages.push({ type: "text", "text": texts[i] });
@@ -64,11 +65,7 @@ function selectRegisterName(event) {
     }
   }
 
-  if (nameList.length >= 11) {
-    replyMessage(event, "これ以上登録できません。");
-    return;
-  }
-
+  //選択肢の配列
   const items = [];
   for (let i = 0; i < nameList.length; i++) {
     items.push({
@@ -82,15 +79,20 @@ function selectRegisterName(event) {
     });
   }
 
-  items.push({
-    "type": "action",
-    "action": {
-      "type": "postback",
-      "label": "[新規登録]",
-      "data": `action=signup&type=select&itemid=${items.length + 1}`,
-      "text": "登録する"
-    }
-  },
+  //登録名の数が11以下のとき新規登録を表示する。
+  if (nameList.length <= 11) {
+    items.push({
+      "type": "action",
+      "action": {
+        "type": "postback",
+        "label": "[新規登録]",
+        "data": `action=signup&type=select&itemid=${items.length + 1}`,
+        "text": "登録する"
+      }
+    });
+  }
+
+  items.push(
     {
       "type": "action",
       "action": {
@@ -100,8 +102,6 @@ function selectRegisterName(event) {
         "text": "キャンセル"
       }
     });
-
-
 
   var postData = {
     "replyToken": event.replyToken,
@@ -186,7 +186,7 @@ function selectRemoveName(event) {
     replyMessage(event, "まだ名前が登録されていません。");
     return;
   }
-  
+
   //選択肢の配列
   const items = [];
   for (let i = 0; i < nameList.length; i++) {

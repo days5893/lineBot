@@ -32,8 +32,11 @@ function updateForm() {
     }
   }
   nameList = [...new Set(nameList)];  //配列の重複削除
+  if (nameList.length == 0) {
+    return;
+  }
 
-  const form = FormApp.openById("**********"); //フォームのID
+  const form = FormApp.openById('********************');
   const items = form.getItems(FormApp.ItemType.LIST);
   items.forEach(item => {
     if (item.getTitle().match(/名前.*$/)) {

@@ -15,18 +15,18 @@ function getFormValue(e) {
     }
   }
 
-  const timeStamp = e.values[0];//送信した時間
-  const submitName = e.values[1]; //送信した生徒名        
+  const timeStamp = e.values[0];  //送信日時
+  const submitName = e.values[1]; //送信した名前        
   const access = e.values[2]; //入退室
   for (let i = 0; i < userData.length; i++) {
     const userId = userData[i].userId;
     const userNames = userData[i].names;
-        
+
     userNames.forEach(userName => {
       if (submitName == userName) {
         const formatedTime = dayjs.dayjs(timeStamp).locale("ja").format("YYYY/MM/DD(dd) HH:mm");
         const messages = [`${formatedTime}\n${submitName} さんが${access}しました。`];
-
+        // ｄ       
         if (access == "退室" && stayTime(e) != "") {
           messages.push(stayTime(e));
         }
@@ -36,6 +36,7 @@ function getFormValue(e) {
   }
 }
 
+//滞在時間を返す関数
 function stayTime(e) {
   //フォームのスプレッドシートを連想配列に変換
   const form_rows = sheet_form.getLastRow() - 1;
@@ -46,18 +47,18 @@ function stayTime(e) {
     formData.push({ "timeStamp": datas[i][0], "name": datas[i][1], "access": datas[i][2] });
   }
 
-  const timeStamp = e.values[0];//送信した時間
-  const submitName = e.values[1];//送信した生徒名    
+  const timeStamp = e.values[0];  //フォームの送信日時
+  const submitName = e.values[1]; //送信した名前    
   const len = formData.length;
   for (let i = len - 2; i >= 0; i--) {
     if (submitName == formData[i].name) {
-      const baseDate = dayjs.dayjs(formData[i].timeStamp);
-      const endDate = dayjs.dayjs(timeStamp);
-
+      const baseDate = dayjs.dayjs(formData[i].timeStamp);  
+      const endDate = dayjs.dayjs(timeStamp); 
+      //同じ日に入室していたとき
       if (formData[i].access == "入室" && baseDate.date() == endDate.date()) {
-        const diff = dayjs.dayjs(endDate).diff(baseDate, "minutes");
-        const hours = Math.floor(diff / 60);
-        const minutes = diff % 60;
+        const diff = dayjs.dayjs(endDate).diff(baseDate, "minutes");  //滞在時間
+        const hours = Math.floor(diff / 60);  //時間
+        const minutes = diff % 60;  //分
         //1分以上滞在していれば滞在時間を返す
         if (hours > 0)
           return `滞在時間は${hours}時間${minutes}分です。`;

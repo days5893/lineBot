@@ -1,6 +1,6 @@
 //固定値
-const channel_token = "**********"; //チャンネルアクセストークン
-const spreadsheet = SpreadsheetApp.openById("**********");  //スプレッドシートのID
+const channel_token = "********************";
+const spreadsheet = SpreadsheetApp.openById("********************");
 const sheet_userlist = spreadsheet.getSheetByName('userlist');
 const sheet_form = spreadsheet.getSheetByName('form');
 const last_row = sheet_userlist.getLastRow();
@@ -15,7 +15,6 @@ function doPost(e) {
 
   events.forEach(event => {
     const eventType = event.type;
-
     //友達追加時にuserIdを登録する。
     if (eventType == "follow") {
       const userId = event.source.userId;
@@ -34,7 +33,7 @@ function doPost(e) {
         }
       }
 
-      //メニューボタンが押されたときの処理
+      //メニューボタンのメッセージが送信されたときの処理
       switch (event.message.text) {
         case "新規登録":
           selectRegisterName(event);
@@ -134,7 +133,8 @@ function register(event) {
 
   for (let i = 1; i < datas.length; i++) {
     if (datas[i][0] == userId) {
-      for (let j = 1; j < datas[i].length; j++) { //登録されている列があれば終了
+      //名前の重複があれば終了
+      for (let j = 1; j < datas[i].length; j++) {
         if (datas[i][j] == name) {
           replyMessage(event, "その名前は既に登録されています。");
           return;
@@ -147,8 +147,8 @@ function register(event) {
         replyMessage(event, `${name} さんに再登録しました。`);
       }
 
-      const rows = i + 1;
-      const column = Number(itemId) + 1;
+      const rows = i + 1;//登録する行
+      const column = Number(itemId) + 1;//登録する列（itemidは文字列なのでNumber型に直す）
       sheet_userlist.getRange(rows, column).setValue(name);
     }
   }
