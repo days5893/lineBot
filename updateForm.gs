@@ -36,7 +36,7 @@ function updateForm() {
     return;
   }
 
-  const form = FormApp.openById('********************');
+  const form = FormApp.openById('********************'); //GoogleFormのID
   const items = form.getItems(FormApp.ItemType.LIST);
   items.forEach(item => {
     if (item.getTitle().match(/名前.*$/)) {

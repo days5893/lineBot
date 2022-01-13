@@ -26,7 +26,6 @@ function getFormValue(e) {
       if (submitName == userName) {
         const formatedTime = dayjs.dayjs(timeStamp).locale("ja").format("YYYY/MM/DD(dd) HH:mm");
         const messages = [`${formatedTime}\n${submitName} さんが${access}しました。`];
-        // ｄ       
         if (access == "退室" && stayTime(e) != "") {
           messages.push(stayTime(e));
         }
