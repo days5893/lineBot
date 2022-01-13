@@ -147,8 +147,8 @@ function register(event) {
         replyMessage(event, `${name} さんに再登録しました。`);
       }
 
-      const rows = i + 1;//登録する行
-      const column = Number(itemId) + 1;//登録する列（itemidは文字列なのでNumber型に直す）
+      const rows = i + 1; //登録する行
+      const column = Number(itemId) + 1;  //登録する列
       sheet_userlist.getRange(rows, column).setValue(name);
     }
   }

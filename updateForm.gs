@@ -15,12 +15,12 @@ function delTrigger() {
   }
 }
 
-//　登録名をフォームの選択肢に追加する
+// 登録名をフォームの選択肢に追加する
 function updateForm() {
   //トリガーのセット
   delTrigger();
   setTrigger();
-  // 処理
+  //処理
   const datas = sheet_userlist.getRange(2, 2, last_row, last_column).getValues();
   let nameList = [];
   for (let i = 0; i < datas.length; i++) {

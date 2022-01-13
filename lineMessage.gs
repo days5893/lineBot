@@ -1,4 +1,4 @@
-//lineのpushメッセージ
+// lineのpushメッセージ
 function pushMessage(to, texts) {
   //texts配列をメッセージの形式に直す
   let messages = [];
@@ -26,7 +26,7 @@ function pushMessage(to, texts) {
   return UrlFetchApp.fetch(url, options);
 }
 
-//lineのreplyメッセージ
+// lineのreplyメッセージ
 function replyMessage(event, text) {
   const url = "https://api.line.me/v2/bot/message/reply";
   //自動返信メッセージの内容
@@ -48,7 +48,7 @@ function replyMessage(event, text) {
   return UrlFetchApp.fetch(url, options);
 }
 
-//選択肢を表示する（登録）
+// 選択肢を表示する（登録）
 function selectRegisterName(event) {
   const userId = event.source.userId;
   //登録名を配列に変換
@@ -125,7 +125,7 @@ function selectRegisterName(event) {
   UrlFetchApp.fetch("https://api.line.me/v2/bot/message/reply", options);
 }
 
-//登録確認メッセージ
+// 登録確認メッセージ
 function registerConfirm(event, id, name) {
   const QuestionMessage = {
     "type": "template",
@@ -165,7 +165,7 @@ function registerConfirm(event, id, name) {
   UrlFetchApp.fetch("https://api.line.me/v2/bot/message/reply", Qoptions);
 }
 
-//選択肢を表示する（削除）
+// 選択肢を表示する（削除）
 function selectRemoveName(event) {
   const userId = event.source.userId;
   //登録名を配列に変換
@@ -237,7 +237,7 @@ function selectRemoveName(event) {
   UrlFetchApp.fetch("https://api.line.me/v2/bot/message/reply", options);
 }
 
-//削除確認メッセージ
+// 削除確認メッセージ
 function removeConfirm(event) {
   const id = event.postback.data.split("&")[3].replace("itemid=", "");
   const name = event.postback.data.split("&")[2].replace("data=", "");
