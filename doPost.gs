@@ -1,6 +1,6 @@
 //固定値
 const channel_token = "********************"; //チャネルアクセストークン
-const spreadsheet = SpreadsheetApp.openById("********************");  //スプレッドシートのID
+const spreadsheet = SpreadsheetApp.openById("********************");  //GoogleSpreadSheetのID
 const sheet_userlist = spreadsheet.getSheetByName('userlist');
 const sheet_form = spreadsheet.getSheetByName('form');
 const last_row = sheet_userlist.getLastRow();
