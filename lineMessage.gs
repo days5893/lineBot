@@ -52,7 +52,8 @@ function replyMessage(event, text) {
 function selectRegisterName(event) {
   const userId = event.source.userId;
   //登録名を配列に変換
-  const rows = last_row - 1;
+  const rows = sheet_userlist.getLastRow() - 1;
+  const last_column = sheet_userlist.getLastColumn();
   const datas = sheet_userlist.getRange(2, 1, rows, last_column).getValues();
   const nameList = [];
   for (let i = 0; i < datas.length; i++) {
@@ -168,9 +169,10 @@ function registerConfirm(event, id, name) {
 // 選択肢を表示する（削除）
 function selectRemoveName(event) {
   const userId = event.source.userId;
-  //登録名を配列に変換
-  const rows = last_row - 1;
+  const rows = sheet_userlist.getLastRow() - 1;
+  const last_column = sheet_userlist.getLastColumn();
   const datas = sheet_userlist.getRange(2, 1, rows, last_column).getValues();
+  //登録名を配列に変換
   const nameList = [];
   for (let i = 0; i < datas.length; i++) {
     if (datas[i][0] == userId) {
@@ -211,7 +213,6 @@ function selectRemoveName(event) {
       "text": "キャンセル"
     }
   });
-
 
   //削除する名前の選択肢
   var postData = {

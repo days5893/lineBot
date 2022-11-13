@@ -1,3 +1,4 @@
+//botで名前を登録した後にupdateFormを実行するとフォームの内容が更新される
 function setTrigger() {
   var setTime = new Date();
   setTime.setDate(setTime.getDate() + 1);
@@ -21,6 +22,8 @@ function updateForm() {
   delTrigger();
   setTrigger();
   //処理
+  const last_row = sheet_userlist.getLastRow();
+  const last_column = sheet_userlist.getLastColumn();
   const datas = sheet_userlist.getRange(2, 2, last_row, last_column).getValues();
   let nameList = [];
   for (let i = 0; i < datas.length; i++) {
@@ -31,12 +34,12 @@ function updateForm() {
       }
     }
   }
-  nameList = [...new Set(nameList)];  //配列の重複削除
   if (nameList.length == 0) {
     return;
   }
 
-  const form = FormApp.openById('********************'); //GoogleFormのID
+  nameList = [...new Set(nameList)];  //配列の重複削除
+  const form = FormApp.openById('1cVPdB7Yqj-49JTncGoUHsLadtYhbgYmjfG2irP0ComI'); //GoogleFormのID
   const items = form.getItems(FormApp.ItemType.LIST);
   items.forEach(item => {
     if (item.getTitle().match(/名前.*$/)) {
