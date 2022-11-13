@@ -1,6 +1,6 @@
 //固定値
-const channel_token = "lS373JYUFPiOcPTAqfud9xs5z92ezUDqwU4d0jEyxhvQ7416WrVeiy5v4puaMGv+Wx7TEZKmXCgx/duRKMWQOlhnfxi0aA+yh3lTFdu/rU0PGK90Qu7+YD8Irdsfdr/7icYvTWWTwEQy9S5SVLc1lgdB04t89/1O/w1cDnyilFU=";
-const spreadsheet = SpreadsheetApp.openById("1hpgirjjOWjPF5e93nOX9-SyXSAJLadxRKyYIp4UyVfs");
+const channel_token = "**********"; 
+const spreadsheet = SpreadsheetApp.openById("**********");
 const sheet_userlist = spreadsheet.getSheetByName('userlist');
 
 function doPost(e) {
