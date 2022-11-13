@@ -39,7 +39,7 @@ function updateForm() {
   }
 
   nameList = [...new Set(nameList)];  //配列の重複削除
-  const form = FormApp.openById('1cVPdB7Yqj-49JTncGoUHsLadtYhbgYmjfG2irP0ComI'); //GoogleFormのID
+  const form = FormApp.openById('**********'); //GoogleFormのID
   const items = form.getItems(FormApp.ItemType.LIST);
   items.forEach(item => {
     if (item.getTitle().match(/名前.*$/)) {
