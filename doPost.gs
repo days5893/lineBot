@@ -1,6 +1,6 @@
 //固定値
-const channel_token = "**********"; 
-const spreadsheet = SpreadsheetApp.openById("**********");
+const channel_token = "**********"; //Lineのアクセストークン
+const spreadsheet = SpreadsheetApp.openById("**********"); //スプレッドシートのID
 const sheet_userlist = spreadsheet.getSheetByName('userlist');
 
 function doPost(e) {
